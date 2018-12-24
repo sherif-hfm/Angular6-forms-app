@@ -1,0 +1,47 @@
+<p>
+  home works!
+</p>
+
+<form class="w3-container" (ngSubmit)="onSubmit(myForm)" #myForm="ngForm" >
+  <div >
+  <div ngModelGroup="basicData" >
+<div class="w3-container">
+  <label>Full Name</label>
+  <input class="w3-input" type="text" name="fullName" [(ngModel)]="fullname" required #userName="ngModel">{{fullname}}
+  <span *ngIf="!userName.valid && userName.touched"> Please enter user full name</span>
+</div>
+<div class="w3-container">
+  <label>Email</label>
+  <input class="w3-input" type="text" name="email" [ngModel]="defEmail" required email (change)="emailOnChange()">
+</div>
+<button class="w3-btn w3-blue" type="button"  (click)="addData()">add Data</button>
+</div>
+<div class="w3-container">
+ <input class="w3-check" type="checkbox" name="isActive" ngModel>
+<label>Active</label>
+</div>
+<br><br>
+<div class="w3-container">
+  <input class="w3-radio" type="radio" name="gender" value="male" checked ngModel>
+  <label>Male</label>
+  <input class="w3-radio" type="radio" name="gender" value="female" ngModel>
+  <label>Female</label>
+</div>
+<br>
+  <div class="w3-container">
+    <select class="w3-select" name="options" ngModel>
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+  </div>
+  <br>
+  <div class="w3-container">
+    <button class="w3-btn w3-blue" type="submit" [disabled]="!myForm.valid">Register</button>
+  </div>
+</div>
+  </form>
+  <div *ngIf="myForm.submitted">
+    my data : {{objectTojson(myForm.value)}}
+  </div>

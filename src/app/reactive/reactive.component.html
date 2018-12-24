@@ -1,0 +1,55 @@
+<p>
+  reactive works!
+</p>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div >
+      <div formGroupName="basicData">
+      <div class="w3-container">
+        <label>Full Name</label>
+        <input class="w3-input" type="text" formControlName="fullName"  >
+        <span *ngIf="!myForm.get('basicData.fullName').valid && myForm.get('basicData.fullName').touched">
+          <span *ngIf=" myForm.get('basicData.fullName').errors['required'] && myForm.get('basicData.fullName').touched"> Please enter user full name</span>
+          <span *ngIf=" myForm.get('basicData.fullName').errors['invalidName'] && myForm.get('basicData.fullName').touched "> name is invalid</span>
+      </span>
+      </div>
+      <div class="w3-container">
+        <label>Email</label>
+        <input class="w3-input" type="text"  formControlName="email">
+        <span *ngIf="!myForm.get('basicData.email').valid && myForm.get('basicData.email').touched"> Please enter email</span>
+      </div>
+    </div>
+      <button class="w3-btn w3-blue" type="button" (click)="addData()" >add Data</button>
+      <div class="w3-container">
+       <input class="w3-check" type="checkbox" formControlName="isActive" >
+      <label>Active</label>
+      </div>
+      <br><br>
+      <div class="w3-container">
+        <button type="button" class="w3-btn w3-blue" (click)="addHobby()">Add Hobby</button>
+        <div formArrayName="hobbies">
+          <div  *ngFor="let hobbyCtrl of myForm.get('hobbies').controls;let i = index">
+              <input type="text" [formControlName]="i" >
+          </div>
+        </div>
+      </div>
+      <div class="w3-container">
+        <input class="w3-radio" type="radio"  value="male" checked formControlName="gender" >
+        <label>Male</label>
+        <input class="w3-radio" type="radio"  value="female" formControlName="gender">
+        <label>Female</label>
+      </div>
+      <br>
+        <div class="w3-container">
+          <select class="w3-select" name="options" formControlName="options">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        </div>
+        <br>
+        <div class="w3-container">
+          <button class="w3-btn w3-blue" type="submit" >Register</button>
+        </div>
+      </div>
+</form>
